@@ -1,10 +1,8 @@
-package com.movie.database.controller;
+package com.payment.service.controller;
 
 
-import com.movie.database.dto.TransactionRequest;
-import com.movie.database.dto.TransactionResponse;
-import com.movie.database.service.PaymentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.payment.service.dto.TransactionRequest;
+import com.payment.service.service.PaymentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

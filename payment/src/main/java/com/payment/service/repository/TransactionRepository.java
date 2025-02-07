@@ -1,10 +1,12 @@
-package com.movie.database.repository;
+package com.payment.service.repository;
 
-import com.movie.database.dto.Transaction;
+
+import com.payment.service.dto.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
+@Repository
 public interface TransactionRepository extends JpaRepository<Transaction, UUID> {
 }
