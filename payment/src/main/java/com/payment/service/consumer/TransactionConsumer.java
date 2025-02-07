@@ -27,20 +27,17 @@ public class TransactionConsumer {
     @Transactional
     public void processTransaction(String message) {
         try {
-            System.out.println(message);
+
             Transaction transaction = objectMapper.readValue(message, Transaction.class);
 
 
             boolean isValid = verifyTransaction(transaction);
             if (isValid) {
-                transaction.setStatus("Complete");
+                transaction.setStatus("completed");
             } else {
-                transaction.setStatus("Failed");
+                transaction.setStatus("failed");
             }
-
-
             transactionRepository.save(transaction);
-
 
         } catch (Exception  e) {
             System.err.println("Error processing transaction: " + e.getMessage());
@@ -48,6 +45,7 @@ public class TransactionConsumer {
         }
     }
 
+    //to make sure we are sending valid amount
     private boolean verifyTransaction(Transaction transaction) {
         return transaction.getAmount().compareTo(new BigDecimal("1000")) <= 0;
     }
