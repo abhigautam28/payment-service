@@ -3,8 +3,10 @@ package com.payment.service.consumer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.payment.service.dto.Transaction;
+import com.payment.service.exception.CustomException;
 import com.payment.service.repository.TransactionRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,7 +42,7 @@ public class TransactionConsumer {
             transactionRepository.save(transaction);
 
         } catch (Exception  e) {
-            System.err.println("Error processing transaction: " + e.getMessage());
+            throw new CustomException(HttpStatus.BAD_REQUEST, "Error processing transaction: " );
 
         }
     }

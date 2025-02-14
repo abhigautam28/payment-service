@@ -3,6 +3,7 @@ package com.payment.service.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.payment.service.dto.Transaction;
 import com.payment.service.dto.TransactionRequest;
+import com.payment.service.exception.CustomException;
 import com.payment.service.repository.TransactionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -41,10 +42,10 @@ public class PaymentService {
                     return ResponseEntity.status(HttpStatus.OK).body("Transaction successful");
                 }
             }
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Transaction failed");
+            throw new CustomException(HttpStatus.BAD_REQUEST, "Transaction failed");
+          } catch (Exception e) {
+            throw new CustomException(HttpStatus.BAD_REQUEST, "Transaction failed");
+         }
 
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
-    }
+      }
 }
